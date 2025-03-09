@@ -1,0 +1,28 @@
+<app-navbar [title]="'Inicio'"></app-navbar>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="mt-md">
+        <p>Tus números</p>
+        <div>
+          <ion-card>
+            <ion-card-content>
+              
+              <app-grafic-circle [chartData]="chartData"></app-grafic-circle> <!-- 🔹 Pasar datos al gráfico -->
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+    <div class="mt-sm">
+      <ion-row>
+        <ion-col>
+          <p>Ingreso</p>
+          <app-expense-income-input (inputDataChange)="updateChartData($event)"></app-expense-income-input>
+        </ion-col>
+        <ion-col>Egreso</ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+</ion-content>
