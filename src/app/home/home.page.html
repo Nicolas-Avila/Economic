@@ -21,7 +21,10 @@
           <p>Ingreso</p>
           <app-expense-income-input (inputDataChange)="updateChartData($event)"></app-expense-income-input>
         </ion-col>
-        <ion-col>Egreso</ion-col>
+        <ion-col>
+          Historial
+          <app-history-list [list]="historyList"></app-history-list>
+        </ion-col>
       </ion-row>
     </div>
   </ion-grid>

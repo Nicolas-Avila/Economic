@@ -1,9 +1,15 @@
 <div class="input-cont">
-  <ion-input [(ngModel)]="category" class="inputStyle" [counter]="true" helperText="Limite de caracteres" [maxlength]="15"
+  <ion-input [(ngModel)]="category" class="inputStyle"  [maxlength]="15"
     label="Ingrese una categoria" label-placement="floating" fill="outline"></ion-input>
 
   <ion-input [(ngModel)]="mont" class="mt-md inputStyle" label="Ingrese un monto" type="number" label-placement="floating"
     fill="outline"></ion-input>
 
-    <ion-button (click)="obtainValue()">Default</ion-button>
+  <ion-button (click)="egress ? obtainValueEgress() : obtainValue()">Agregar Valor</ion-button>
+
+  <!-- Botón para ver los datos guardados -->
+  <ion-button (click)="loadEconomicsData()">Ver Datos Guardados</ion-button>
+
+  <!-- Botón para borrar todos los datos -->
+  <ion-button (click)="clearEconomicsData()">Borrar Todos los Datos</ion-button>
 </div>

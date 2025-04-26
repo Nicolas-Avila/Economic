@@ -1,0 +1,13 @@
+<div class="cont-list">
+  <ion-list *ngIf="list; else noData">
+    <ion-item *ngFor="let item of list">
+      <ion-label>
+        <h2>Gasto: {{ item.sector }}</h2>
+        <p>${{ item.size }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+<ng-template #noData>
+  <p>No hay ningun producto</p>
+</ng-template>
