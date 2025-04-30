@@ -1,5 +1,3 @@
-<app-navbar [title]="'Inicio'"></app-navbar>
-
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
@@ -8,22 +6,25 @@
         <div>
           <ion-card>
             <ion-card-content>
-              
               <app-grafic-circle [chartData]="chartData"></app-grafic-circle> <!-- 🔹 Pasar datos al gráfico -->
             </ion-card-content>
           </ion-card>
         </div>
       </ion-col>
     </ion-row>
+
     <div class="mt-sm">
       <ion-row>
         <ion-col>
           <p>Ingreso</p>
           <app-expense-income-input (inputDataChange)="updateChartData($event)"></app-expense-income-input>
         </ion-col>
-        <ion-col>
-          Historial
-          <app-history-list [list]="historyList"></app-history-list>
+
+        <ion-col class="history">
+          <p>Historial</p>
+          <div class="history-list-container">
+            <app-history-list></app-history-list>
+          </div>
         </ion-col>
       </ion-row>
     </div>

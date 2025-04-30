@@ -18,7 +18,7 @@ import {
 } from '@ionic/angular/standalone';
 import { GraficCircleComponent } from '../componets/grafic-circle/grafic-circle.component';
 import { ExpenseIncomeInputComponent } from '../componets/expense-income-input/expense-income-input.component';
-import { HistoryListComponent } from '../history-list/history-list.component';
+import { HistoryListComponent } from '../componets/history-list/history-list.component';
 
 @Component({
   selector: 'app-home',
@@ -55,6 +55,6 @@ export class HomePage implements OnInit {
 
   updateChartData(newData: any[]) {
     this.chartData = [...this.chartData, ...newData];
-    this.historyList = newData
+    this.historyList = [...this.chartData, ...newData]
   }
 }

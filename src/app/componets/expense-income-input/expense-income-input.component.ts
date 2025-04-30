@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
 import { IonInput, IonButton } from '@ionic/angular/standalone';
 import { Preferences } from '@capacitor/preferences';
+import { EconomicsService } from 'src/app/service/economic.service';
 
 @Component({
   selector: 'app-expense-income-input',
@@ -12,60 +13,55 @@ import { Preferences } from '@capacitor/preferences';
 export class ExpenseIncomeInputComponent implements OnInit {
   @Output() inputDataChange = new EventEmitter<any[]>();
   @Input() egress: boolean = false;
+
   category: string = '';
   mont: number | null = null;
   economicsData: any[] = [];
 
-  constructor() {}
+  constructor(private economicsService: EconomicsService) {} // 👈 INYECTAR SERVICIO
 
   ngOnInit() {
-    this.loadEconomicsData();  // Cargar los datos cuando el componente se inicializa
+    this.loadEconomicsData();  
   }
 
-  // Función para cargar los datos desde Preferences
   async loadEconomicsData() {
     const { value } = await Preferences.get({ key: 'economicsData' });
     if (value) {
-      this.economicsData = JSON.parse(value);  // Cargar datos desde el almacenamiento
-      console.log('Datos cargados:', this.economicsData);
-      this.inputDataChange.emit(this.economicsData)
-    } else {
-      console.log('No hay datos guardados.');
+      this.economicsData = JSON.parse(value);
+      this.inputDataChange.emit(this.economicsData);
     }
   }
 
-  // Función para guardar los datos en Preferences
   async saveEconomicsData() {
     await Preferences.set({
       key: 'economicsData',
       value: JSON.stringify(this.economicsData),
     });
-    console.log('Datos guardados en Preferences:', this.economicsData);
   }
 
-  obtainValue() {
+  async obtainValue() {
     if (this.category && this.mont) {
       const newData = { sector: this.category, size: this.mont };
       this.economicsData.push(newData);
-      this.saveEconomicsData();  
+      await this.saveEconomicsData();  
       this.inputDataChange.emit([newData]); 
+      this.economicsService.notifyUpdate(); // 👈 NOTIFICAR ACTUALIZACIÓN
     }
   }
-  
-  obtainValueEgress() {
-    if (this.category && this.mont) {
-      const newData = { sector: this.category, size: "-" + this.mont };
-      this.economicsData.push(newData);  
-      this.saveEconomicsData();  
-      this.inputDataChange.emit([newData]); 
-    }
-  }
-  
 
-  // Función para borrar los datos
+  async obtainValueEgress() {
+    if (this.category && this.mont) {
+      const newData = { sector: this.category, size: -this.mont }; // 👈 cambio "-" + this.mont a -this.mont
+      this.economicsData.push(newData);  
+      await this.saveEconomicsData();  
+      this.inputDataChange.emit([newData]); 
+      this.economicsService.notifyUpdate(); // 👈 NOTIFICAR ACTUALIZACIÓN
+    }
+  }
+
   async clearEconomicsData() {
     await Preferences.remove({ key: 'economicsData' });
     this.economicsData = []; 
-    console.log('Todos los datos han sido borrados');
+    this.economicsService.notifyUpdate(); // 👈 NOTIFICAR BORRADO
   }
 }

@@ -19,3 +19,20 @@ ion-card{
     margin: auto;
     width: 80%;
 }
+
+.history {
+  max-height: 400px; 
+  overflow: auto;
+}
+
+.history-list-container {
+  max-width: 80%; 
+  margin: 0 auto; 
+}
+
+@media (max-width: 768px) {
+  ion-row {
+    flex-direction: column;
+  }
+  
+}

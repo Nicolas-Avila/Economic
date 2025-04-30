@@ -8,8 +8,9 @@
   <ion-button (click)="egress ? obtainValueEgress() : obtainValue()">Agregar Valor</ion-button>
 
   <!-- Botón para ver los datos guardados -->
-  <ion-button (click)="loadEconomicsData()">Ver Datos Guardados</ion-button>
+  <ion-button *ngIf="false" (click)="loadEconomicsData()">Ver Datos Guardados</ion-button>
 
+  <br>
   <!-- Botón para borrar todos los datos -->
   <ion-button (click)="clearEconomicsData()">Borrar Todos los Datos</ion-button>
 </div>

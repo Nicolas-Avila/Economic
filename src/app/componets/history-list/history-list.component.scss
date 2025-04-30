@@ -1,0 +1,23 @@
+.cont-list{
+    overflow: auto;
+}
+.inline-text {
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .label-text {
+    font-size: 1.1rem; 
+    font-weight: 600;
+  }
+  
+  .amount-text {
+    font-size: 0.9rem; 
+    color: #555;       
+  }
+  
+  
+  
+  

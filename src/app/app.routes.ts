@@ -15,5 +15,9 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () => import('./home/home.page').then( (m) => m.HomePage)
   },
+  {
+    path: 'historial',
+    loadComponent: () => import('./history-page/history-page.page').then( m => m.HistoryPagePage)
+  },
   
 ];

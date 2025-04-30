@@ -1,0 +1,16 @@
+<div class="cont-list">
+  <ion-list *ngIf="list.length > 0; else noData">
+    <ion-item *ngFor="let item of list.slice().reverse()">
+      <ion-label>
+        <p class="inline-text">
+          <span class="label-text">Gasto: {{ item.sector }}</span>
+          <span class="amount-text"> - ${{ item.size }}</span>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+
+<ng-template #noData>
+  <p>No hay ningún producto</p>
+</ng-template>
